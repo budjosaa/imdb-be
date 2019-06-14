@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginUserRequest;
+use App\Services\Auth\MyAuthServiceInterface;
+use Exception;
 
 class AuthController extends Controller
 {
@@ -12,9 +15,11 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(MyAuthServiceInterface $authService)
     {
         $this->middleware('auth:api', ['except' => ['login']]);
+
+        $this->authService=$authService;
     }
 
     /**
@@ -22,15 +27,15 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(LoginUserRequest $requst)
     {
         $credentials = request(['email', 'password']);
+        $requst->validated();
 
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+            $token = $this->authService->attempt($credentials);
 
-        return $this->respondWithToken($token);
+            return $this->respondWithToken($token);
+
     }
 
     /**

@@ -5,17 +5,24 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Movie;
+Use App\Services\MovieServices\MovieService;
 
 class MovieController extends Controller
 {
+    public function __construct(MovieService $movieService){
+       $this->movieService = $movieService;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request) 
     {
-        return Movie::all();
+       $elementsPerPage=$request->query('elementsPerPage');
+        
+       return $this->movieService->index($elementsPerPage);
+    
     }
 
     /**
@@ -35,9 +42,9 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Movie $movie)
     {
-        //
+        return $movie;
     }
 
     /**
@@ -47,7 +54,7 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Movie $movie)
     {
         //
     }
@@ -58,7 +65,7 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Movie $movie)
     {
         //
     }
