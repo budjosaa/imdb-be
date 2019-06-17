@@ -25,3 +25,4 @@ Route::group([
 });
 
 Route::apiResource('movies', 'Api\MovieController')->middleware('jwt.auth');
+Route::post('movies/search','Api\MovieController@search');

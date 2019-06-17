@@ -69,4 +69,11 @@ class MovieController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        $title=$request->query('title');
+
+        return $this->movieService->search($title);
+    }
 }
