@@ -8,21 +8,13 @@ class MovieService {
 
     public function show(){}
     
-    public function index ($elemntsPerPage = 5)
+    public function index ($elemntsPerPage = 5,$title)
     {
-        return Movie::paginate($elemntsPerPage);
-    }
-
-    public function search ($title) 
-    {
-        if($title!="")
+        $queryBuilder = Movie::query();
+        if($title)
         {
-            return Movie::where('title','like','%'.$title.'%')->paginate(5);
+            $queryBuilder = $queryBuilder->where('title','like','%'.$title.'%');
         }
-        else
-        {
-            return Movie::paginate(5);
-        }
+        return $queryBuilder->paginate($elemntsPerPage);        
     }
-
 }
