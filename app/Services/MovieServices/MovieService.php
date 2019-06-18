@@ -6,7 +6,11 @@ use App\Movie;
 
 class MovieService {
 
-    public function show(){}
+    public function show($movie)
+    {
+         $movie->increment('times_visited');
+         return $movie;
+    }
     
     public function index ($elemntsPerPage = 5,$title)
     {
@@ -15,6 +19,6 @@ class MovieService {
         {
             $queryBuilder = $queryBuilder->where('title','like','%'.$title.'%');
         }
-        return $queryBuilder->paginate($elemntsPerPage);        
+        return $queryBuilder->paginate($elemntsPerPage);   
     }
 }
