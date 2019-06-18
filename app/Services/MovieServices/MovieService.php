@@ -8,9 +8,8 @@ class MovieService {
 
     public function show($movie)
     {
-        $movie->times_visited+=1;
-        $movie->save();
-        return $movie;
+         $movie->increment('times_visited');
+         return $movie;
     }
     
     public function index ($elemntsPerPage = 5,$title)
