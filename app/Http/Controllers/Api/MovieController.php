@@ -11,6 +11,7 @@ class MovieController extends Controller
 {
     public function __construct(MovieService $movieService){
        $this->movieService = $movieService;
+       $this->middleware('inc.view',['only'=>['show']]);
     }
     /**
      * Display a listing of the resource.
@@ -45,7 +46,7 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
-        return $this->movieService->show($movie);
+        return $movie;
     }
 
     /**

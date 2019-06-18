@@ -8,8 +8,6 @@ class MovieService {
 
     public function show($movie)
     {
-         $movie->increment('times_visited');
-         return $movie;
     }
     
     public function index ($elemntsPerPage = 5,$title)
@@ -21,4 +19,8 @@ class MovieService {
         }
         return $queryBuilder->paginate($elemntsPerPage);   
     }
+    public function increment($id){
+        $movie=Movie::find($id)->increment('times_visited');
+    }
+ 
 }
