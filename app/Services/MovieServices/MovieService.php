@@ -24,7 +24,7 @@ class MovieService {
 
     public function incrementViews($id)
     {
-        Movie::find($id)->increment('times_visited');
+        Movie::where('id',$id)->increment('times_visited');
     }
 
     public function like($userId,$movieId,$reaction)

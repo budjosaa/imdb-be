@@ -20,7 +20,7 @@ class IncrementViews
      */
     public function handle($request, Closure $next)
     {   
-        $this->movieService->incrementViews($request->movie->id);
+        $this->movieService->incrementViews ($request->movie->id);
         return $next($request);
     }
 }
