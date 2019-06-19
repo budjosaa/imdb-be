@@ -6,7 +6,7 @@ use Closure;
 Use App\Services\MovieServices\MovieService;
 
 
-class incrementViews
+class IncrementViews
 {
     public function __construct(MovieService $movieService){
         $this->movieService = $movieService;
@@ -20,7 +20,7 @@ class incrementViews
      */
     public function handle($request, Closure $next)
     {   
-        $this->movieService->increment($request->movie->id);
+        $this->movieService->incrementViews($request->movie->id);
         return $next($request);
     }
 }

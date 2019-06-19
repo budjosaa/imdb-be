@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Movie;
 Use App\Services\MovieServices\MovieService;
+use App\Http\Requests\LikeRequest;
 
 class MovieController extends Controller
 {
@@ -70,5 +71,12 @@ class MovieController extends Controller
     public function destroy(Movie $movie)
     {
         //
+    }
+
+    public function like(LikeRequest $request, $movieId)
+    {
+        $userId = auth()->id();
+        $reaction=$request->reaction;
+        return $this->movieService->like($userId,$movieId,$reaction);
     }
 }
