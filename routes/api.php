@@ -24,4 +24,10 @@ Route::group([
     Route::post('register', 'Auth\RegisterController@create');
 });
 
-Route::apiResource('movies', 'Api\MovieController')->middleware('jwt.auth');
+Route::group([
+    'middleware' => 'jwt.auth'
+],
+    function($router) {
+    Route::apiResource('movies','Api\MovieController');
+    Route::post('movies/{movieId}/like','Api\MovieController@like');    
+});
