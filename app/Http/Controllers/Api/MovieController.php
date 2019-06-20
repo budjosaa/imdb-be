@@ -24,7 +24,11 @@ class MovieController extends Controller
        $elementsPerPage=$request->query('elementsPerPage');
        $title=$request->query('title');
        $genreId=$request->query('genreId');
-       return $this->movieService->index($elementsPerPage,$title,$genreId);
+       $searchParams = [
+           'title' => $title,
+           'genreId' => $genreId
+       ];
+       return $this->movieService->index($elementsPerPage, $searchParams);
     
     }
 

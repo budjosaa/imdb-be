@@ -12,12 +12,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Genre::create(['name'=>'action']);
-        Genre::create(['name'=>'horror']);
-        Genre::create(['name'=>'drama']);
-        Genre::create(['name'=>'triler']);
-        Genre::create(['name'=>'comedy']);
-        Genre::create(['name'=>'romance']);
+        $genres=['action','horror','drama','triler','comedy','romance'];
+        foreach ($genres as $genre) {
+              Genre::create(['name'=>$genre]);
+        }
         $this->call(UsersTableSeeder::class);
         $this->call(MovieTableSeeder::class);
         

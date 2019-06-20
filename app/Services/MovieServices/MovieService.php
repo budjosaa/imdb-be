@@ -12,18 +12,18 @@ class MovieService {
     {
     }
     
-    public function index ($elemntsPerPage = 5,$title,$genreId)
+    public function index ($elemntsPerPage = 5,$searchParams)
     {
         $queryBuilder = Movie::query();
-        if($title)
+        if($searchParams['title'])
         {
-            $queryBuilder = $queryBuilder->where('title','like','%'.$title.'%');
+            $queryBuilder = $queryBuilder->where('title','like','%'.$searchParams['title'].'%');
         }
-        if($genreId)
+        if($searchParams['genreId'])
         {
-            $queryBuilder = $queryBuilder->where('genre_id',$genreId);
+            $queryBuilder = $queryBuilder->where('genre_id',$searchParams['genreId']);
         }
-            return $queryBuilder->paginate($elemntsPerPage);   
+        return $queryBuilder->paginate($elemntsPerPage);   
     }   
 
     public function incrementViews($id)
