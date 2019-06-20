@@ -29,5 +29,6 @@ Route::group([
 ],
     function($router) {
     Route::apiResource('movies','Api\MovieController');
-    Route::post('movies/{movieId}/like','Api\MovieController@like');    
+    Route::post('movies/{movieId}/like','Api\MovieController@like');   
+    Route::get('genres','Api\GenresController@index');
 });
