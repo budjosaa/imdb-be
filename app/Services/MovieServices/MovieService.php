@@ -12,15 +12,19 @@ class MovieService {
     {
     }
     
-    public function index ($elemntsPerPage = 5,$title)
+    public function index ($elemntsPerPage = 5,$title,$genreId)
     {
         $queryBuilder = Movie::query();
         if($title)
         {
             $queryBuilder = $queryBuilder->where('title','like','%'.$title.'%');
         }
-        return $queryBuilder->paginate($elemntsPerPage);   
-    }
+        if($genreId)
+        {
+            $queryBuilder = $queryBuilder->where('genre_id',$genreId);
+        }
+            return $queryBuilder->paginate($elemntsPerPage);   
+    }   
 
     public function incrementViews($id)
     {
@@ -32,15 +36,12 @@ class MovieService {
         $like=Like::where('user_id',$userId)
                   ->where('movie_id',$movieId)
                   ->first();
-                  
         $movie=Movie::find($movieId);
-
         if (!$like) {
             $this->createReaction($movieId,$userId,$reaction);
             $this->incrementReaction($movie,$reaction);
             return $movie; 
         }
-        
         if($like->reaction==$reaction) {
             $this->deleteReaction($like);
             $this->decrementReaction($movie,$reaction);
