@@ -9,8 +9,7 @@ use App\User;
 class CommentService {
     public function getCommentsForMovie ($movie)
     {
-       $comments = $movie->comments;
-       return $this->attachUserToComment($comments);
+     return  $comments = $movie->comments()->with('user')->get();
     }
     public function createComment ($movieId, $content, $userId)
     {
@@ -20,11 +19,4 @@ class CommentService {
         $comment->delete();
         return $comment;
     }
-    public function attachUserToComment ($comments)
-    {
-      foreach($comments as $comment){
-        $comment->user;
-      }
-      return $comments;
-    }   
 }
