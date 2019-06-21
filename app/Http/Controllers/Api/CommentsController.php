@@ -21,8 +21,9 @@ class CommentsController extends Controller
     }
 
     public function store (CommentRequest $request, $id) {
+        $userId = auth()->id();
         $commentContent = $request->content;
-       return $this->commentService->createComment ($id, $commentContent);
+       return $this->commentService->createComment ($id, $commentContent,$userId);
     }
 
     public function destroy (Comment $comment) {
