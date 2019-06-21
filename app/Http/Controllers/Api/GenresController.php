@@ -9,14 +9,14 @@ use App\Services\GenreServices\GenreService;
 
 class GenresController extends Controller
 {
-    public function __construct(GenreService $genreService)
+    public function __construct (GenreService $genreService)
     {
         $this->genreService=$genreService;
     }
     
-    public function index()
+    public function index ()
     {
-    return $this->genreService->getGenres();
+        return $this->genreService->getGenres();
     }
 
 }

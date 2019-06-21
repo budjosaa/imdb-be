@@ -28,7 +28,10 @@ Route::group([
     'middleware' => 'jwt.auth'
 ],
     function($router) {
-    Route::apiResource('movies','Api\MovieController');
-    Route::post('movies/{movieId}/like','Api\MovieController@like');   
-    Route::get('genres','Api\GenresController@index');
+    Route::apiResource('movies', 'Api\MovieController');
+    Route::post('movies/{movieId}/like', 'Api\MovieController@like');   
+    Route::get('genres', 'Api\GenresController@index');
+    Route::get('movies/{movie}/comments', 'Api\CommentsController@index');
+    Route::post('movies/{id}/comments/create', 'Api\CommentsController@store');
+    Route::delete('movies/comments/{comment}/delete', 'Api\CommentsController@destroy');
 });

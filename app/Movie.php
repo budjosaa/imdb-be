@@ -6,10 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Movie extends Model
 {
-    protected $guarded= ['id'];
+    protected $guarded = ['id'];
         
     public function likes()
     {
     return $this->hasMany('App\Like');
+    }
+    public function comments ()
+    {
+        return $this->hasMany('App\Comment');
     }
 }
