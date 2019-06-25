@@ -53,9 +53,7 @@ class MovieService {
     }
     public function createMovie ($movieParams)
     {
-        return Movie::create(['title' => $movieParams['title'],
-                              'description' =>$movieParams['description'],
-                              'image_url' => $movieParams['image_url']]);
+        return Movie::create($movieParams);
     }
 
     protected function createReaction($movieId,$userId,$reaction)
