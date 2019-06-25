@@ -8,9 +8,9 @@ class Movie extends Model
 {
     protected $guarded = ['id'];
         
-    public function likes()
+    public function likes ()
     {
-    return $this->hasMany('App\Like');
+        return $this->hasMany('App\Like');
     }
     public function comments ()
     {

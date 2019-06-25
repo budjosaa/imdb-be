@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Movie;
 Use App\Services\MovieServices\MovieService;
 use App\Http\Requests\LikeRequest;
+use App\Http\Requests\MovieRequest;
 
 class MovieController extends Controller
 {
@@ -38,9 +39,10 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MovieRequest $request)
     {
-        //
+        $movieParams=request(['title','description','image_url']);
+        return $this->movieService->createMovie($movieParams);
     }
 
     /**
