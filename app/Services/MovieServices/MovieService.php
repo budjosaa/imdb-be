@@ -51,6 +51,12 @@ class MovieService {
         $this->updateReaction($like,$reaction);
         return $movie;
     }
+    public function createMovie ($movieParams)
+    {
+        return Movie::create(['title' => $movieParams['title'],
+                              'description' =>$movieParams['description'],
+                              'image_url' => $movieParams['image_url']]);
+    }
 
     protected function createReaction($movieId,$userId,$reaction)
     {
